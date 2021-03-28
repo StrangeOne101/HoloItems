@@ -1,13 +1,13 @@
-package com.strangeone101.holoitems.items;
+package com.strangeone101.holoitems;
 
 import com.strangeone101.holoitemsapi.CustomItem;
-import com.strangeone101.holoitems.items.implementations.BerryTrident;
-import com.strangeone101.holoitems.items.implementations.EnchantedBlock;
-import com.strangeone101.holoitems.items.implementations.MegaSponge;
-import com.strangeone101.holoitems.items.implementations.MoguBoots;
-import com.strangeone101.holoitems.items.implementations.RushiaShield;
-import com.strangeone101.holoitems.items.implementations.RussianRevolver;
-import com.strangeone101.holoitems.items.implementations.ScrambledEgg;
+import com.strangeone101.holoitems.items.BerryTrident;
+import com.strangeone101.holoitems.items.EnchantedBlock;
+import com.strangeone101.holoitems.items.MegaSponge;
+import com.strangeone101.holoitems.items.MoguBoots;
+import com.strangeone101.holoitems.items.RushiaShield;
+import com.strangeone101.holoitems.items.RussianRevolver;
+import com.strangeone101.holoitems.items.ScrambledEgg;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 

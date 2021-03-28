@@ -4,7 +4,7 @@ import com.strangeone101.holoitems.Keys;
 import com.strangeone101.holoitemsapi.CustomItem;
 import com.strangeone101.holoitemsapi.ItemAbility;
 import com.strangeone101.holoitems.HoloItemsPlugin;
-import com.strangeone101.holoitems.items.Items;
+import com.strangeone101.holoitems.Items;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;

@@ -1,7 +1,6 @@
 package com.strangeone101.holoitems;
 
 import com.strangeone101.holoitems.command.HoloItemsCommand;
-import com.strangeone101.holoitems.items.Items;
 import com.strangeone101.holoitemsapi.loot.CustomLootRegistry;
 import com.strangeone101.holoitems.tables.Endermite;
 import com.strangeone101.holoitems.tables.GemOre;
@@ -34,6 +33,7 @@ public final class HoloItemsPlugin extends JavaPlugin {
         getCommand("holoitem").setExecutor(new HoloItemsCommand());
 
         HoloItemsAPI.setup(this);
+        new Keys();
 
         Items.registerHoloItems();
         registerRecipes();

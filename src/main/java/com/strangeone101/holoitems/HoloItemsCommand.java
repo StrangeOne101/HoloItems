@@ -1,6 +1,5 @@
 package com.strangeone101.holoitems;
 
-import com.strangeone101.holoitems.items.Items;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
