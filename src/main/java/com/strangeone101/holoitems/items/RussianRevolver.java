@@ -2,7 +2,6 @@ package com.strangeone101.holoitems.items;
 
 import com.strangeone101.holoitems.Keys;
 import com.strangeone101.holoitemsapi.CustomItem;
-import com.strangeone101.holoitems.HoloItemsPlugin;
 import com.strangeone101.holoitemsapi.interfaces.Interactable;
 import com.strangeone101.holoitemsapi.util.CustomDamage;
 import com.strangeone101.holoitemsapi.util.CustomDamageSource;
@@ -22,11 +21,13 @@ import java.util.Random;
 
 public class RussianRevolver extends CustomItem implements Interactable {
 
-    private int shots;
+    private final int shots;
+    private final CustomDamageSource customDamageSource;
 
     public RussianRevolver(String name, int shots) {
         super(name, Material.GOLDEN_HOE);
         this.shots = shots;
+        this.customDamageSource = new CustomDamageSource("RussianRoulette", true);
     }
 
     @Override
@@ -81,7 +82,7 @@ public class RussianRevolver extends CustomItem implements Interactable {
                 player.getWorld().dropItem(player.getLocation(), clone); //Drops the item so other players can continue playing regardless of gamerules
                 stack.setAmount(0);
                 stack.setType(Material.AIR);
-                CustomDamage.damageEntity(player, player, 100, CustomDamageSource.RUSSIAN_ROULETTE); //Kill them
+                CustomDamage.damageEntity(player, player, 100, this.customDamageSource); //Kill them
             } else {
                 player.sendMessage(ChatColor.YELLOW + "CLICK! You pull the trigger and nothing happens!");
                 player.getWorld().playSound(player.getLocation(), Sound.BLOCK_DISPENSER_DISPENSE, 2, 2);
