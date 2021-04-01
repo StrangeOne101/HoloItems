@@ -5,9 +5,10 @@ import com.strangeone101.holoitemsapi.CustomItem;
 import com.strangeone101.holoitemsapi.Properties;
 import com.strangeone101.holoitems.abilities.RushiaShieldAbility;
 import com.strangeone101.holoitemsapi.interfaces.Interactable;
-import com.strangeone101.holoitemsapi.itemevent.ItemEvent;
+import com.strangeone101.holoitemsapi.itemevent.ActiveConditions;
 import com.strangeone101.holoitemsapi.itemevent.EventContext;
-import com.strangeone101.holoitemsapi.itemevent.Position;
+import com.strangeone101.holoitemsapi.itemevent.ItemEvent;
+import com.strangeone101.holoitemsapi.itemevent.Target;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -109,10 +110,9 @@ public class RushiaShield extends CustomItem implements Interactable {
         return false;
     }
 
-    @ItemEvent
+    @ItemEvent(active = ActiveConditions.HELD, target = Target.WORLD)
     public void onTrigger(EventContext context, EntityDeathEvent event) {
         //If they are holding the item in the offhand or main hand
-        if (context.getPosition() == Position.OFFHAND || context.getPosition() == Position.HELD) {
             LivingEntity entity = event.getEntity();
 
             //If the killer is the person holding this item and the entity is a mob but not a boss
@@ -126,6 +126,6 @@ public class RushiaShield extends CustomItem implements Interactable {
                 }
 
             }
-        }
+
     }
 }
