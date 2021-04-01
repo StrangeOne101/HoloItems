@@ -6,6 +6,7 @@ import com.strangeone101.holoitemsapi.Properties;
 import com.strangeone101.holoitemsapi.itemevent.EventCache;
 import com.strangeone101.holoitemsapi.itemevent.Position;
 import org.apache.commons.lang3.tuple.MutableTriple;
+import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -15,6 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Map;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -43,16 +45,28 @@ public class HoloItemsCommand implements CommandExecutor {
                         sender.sendMessage("Must not be used from console");
                         return true;
                     }
-                    if (!EventCache.CACHED_POSITIONS_BY_SLOT.containsKey(sender)) {
+                    if (!EventCache.isCached((Player) sender)) {
                         sender.sendMessage("No cache found!");
                         return true;
                     }
-                    sender.sendMessage("----- Cache -------");
+                    sender.sendMessage("----- Cache (old) -------");
                     for (Integer slot : EventCache.CACHED_POSITIONS_BY_SLOT.get(sender).keySet()) {
                         MutableTriple<CustomItem, ItemStack, Position> triple =
                                 EventCache.CACHED_POSITIONS_BY_SLOT.get(sender).get(slot);
                         sender.sendMessage("[" + slot + "] " + triple.getLeft().getInternalName() + " = " + triple.getRight().toString());
+                    }
+                    sender.sendMessage("----- End cache (old) -------");
+                    sender.sendMessage("----- Cache -------");
 
+                    for (Map.Entry<CustomItem, Map<Player, Map<Integer, Pair<ItemStack, Position>>>> entries : EventCache.POSITIONS_BY_ITEM.entrySet()) {
+                        CustomItem customItem = entries.getKey();
+
+                        Map<Integer, Pair<ItemStack, Position>> playerSlotCache = entries.getValue().get(sender);
+                        if (playerSlotCache == null) continue;
+
+                        for (Map.Entry<Integer, Pair<ItemStack, Position>> pairEntry : playerSlotCache.entrySet()) {
+                            sender.sendMessage("[" + pairEntry.getKey() + "] " + customItem.getInternalName() + " = " + pairEntry.getValue().getRight().toString());
+                        }
                     }
                     sender.sendMessage("----- End cache -------");
                 } else if (args[1].equalsIgnoreCase("registry")) {
