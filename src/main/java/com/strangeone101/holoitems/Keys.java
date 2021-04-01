@@ -25,6 +25,10 @@ public class Keys {
     /** How many clicks until death. Should be <strong>INT</strong> */
     public final NamespacedKey RUSSIAN_ROULETTE = new NamespacedKey(plugin, "russian_roulette");
 
+    public final NamespacedKey DEATH_LOC = new NamespacedKey(HoloItemsPlugin.INSTANCE, "death_loc");
+    public final NamespacedKey DEATH_LOC_SET = new NamespacedKey(HoloItemsPlugin.INSTANCE, "death_loc_set");
+    public final NamespacedKey DEATH_WORLD = new NamespacedKey(HoloItemsPlugin.INSTANCE, "death_world");
+
     private static Keys keys;
 
     public static Keys getKeys() {

@@ -1,13 +1,7 @@
-package com.strangeone101.holoitems.items;
+package com.strangeone101.holoitems;
 
+import com.strangeone101.holoitems.items.*;
 import com.strangeone101.holoitemsapi.CustomItem;
-import com.strangeone101.holoitems.items.implementations.BerryTrident;
-import com.strangeone101.holoitems.items.implementations.EnchantedBlock;
-import com.strangeone101.holoitems.items.implementations.MegaSponge;
-import com.strangeone101.holoitems.items.implementations.MoguBoots;
-import com.strangeone101.holoitems.items.implementations.RushiaShield;
-import com.strangeone101.holoitems.items.implementations.RussianRevolver;
-import com.strangeone101.holoitems.items.implementations.ScrambledEgg;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 
@@ -35,7 +29,8 @@ public class Items {
 
     public static CustomItem SCRAMBLED_EGG;
     public static CustomItem BUTTER_CLOCK;
-
+    public static CustomItem CAT_PLUSHIE;
+    public static CustomItem DEATH_CRYSTAL;
 
     public static void registerHoloItems() {
 
@@ -99,6 +94,8 @@ public class Items {
 
         SCRAMBLED_EGG = new ScrambledEgg("scrambled_egg", Material.BAKED_POTATO).setDisplayName(ChatColor.YELLOW + "Scrambled Egg").setInternalID(501).register();
         BUTTER_CLOCK = new ScrambledEgg("butter_clock", Material.CLOCK).setDisplayName(ChatColor.YELLOW + "Butter Clock").setInternalID(502).register();
+        CAT_PLUSHIE = new CatPlushie().setInternalID(2124).register();
+        DEATH_CRYSTAL = new DeathCrystal().setInternalID(4100).register();
 
     }
 }

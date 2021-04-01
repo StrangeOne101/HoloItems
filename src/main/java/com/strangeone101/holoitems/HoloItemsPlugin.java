@@ -1,7 +1,7 @@
 package com.strangeone101.holoitems;
 
 import com.strangeone101.holoitems.command.HoloItemsCommand;
-import com.strangeone101.holoitems.items.Items;
+import com.strangeone101.holoitems.tables.Cat;
 import com.strangeone101.holoitemsapi.loot.CustomLootRegistry;
 import com.strangeone101.holoitems.tables.Endermite;
 import com.strangeone101.holoitems.tables.GemOre;
@@ -34,15 +34,16 @@ public final class HoloItemsPlugin extends JavaPlugin {
         getCommand("holoitem").setExecutor(new HoloItemsCommand());
 
         HoloItemsAPI.setup(this);
+        new Keys();
 
         Items.registerHoloItems();
         registerRecipes();
 
         CustomLootRegistry.registerDeathTable(EntityType.ENDERMITE, new Endermite());
+        CustomLootRegistry.registerDeathTable(EntityType.CAT, new Cat());
+        CustomLootRegistry.registerDeathTable(EntityType.OCELOT, new Cat());
         CustomLootRegistry.registerBlockBreakTable(Material.SPAWNER, new Spawner());
         CustomLootRegistry.registerBlockBreakTable(Material.EMERALD_ORE, new GemOre());
-
-
 
         getLogger().info("Registered " + CustomItemRegistry.getCustomItems().size()
                 + " custom items and " + RecipeManager.getRegisteredAmount() + " custom recipes!");
