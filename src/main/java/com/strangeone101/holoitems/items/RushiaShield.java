@@ -113,19 +113,16 @@ public class RushiaShield extends CustomItem implements Interactable {
     @ItemEvent(active = ActiveConditions.HELD, target = Target.WORLD)
     public void onTrigger(EventContext context, EntityDeathEvent event) {
         //If they are holding the item in the offhand or main hand
-            LivingEntity entity = event.getEntity();
+        LivingEntity entity = event.getEntity();
 
-            //If the killer is the person holding this item and the entity is a mob but not a boss
-            if (entity.getKiller() == context.getPlayer() && entity instanceof Mob && !(entity instanceof Boss)) {
-                Player killer = entity.getKiller();
+        //If the killer is the person holding this item and the entity is a mob but not a boss
+        if (entity.getKiller() == context.getPlayer() && entity instanceof Mob && !(entity instanceof Boss)) {
 
-                //If the killed mob isn't a mob being used for a shield already & its a mob we are allowed to use
-                if (!RushiaShieldAbility.getShieldMobs().contains(entity) && !RushiaShield.EXCEPTIONS.contains(entity.getType())) {
-                    killMob((Mob) entity, entity.getKiller(), context.getStack()); //Run the killMob method
-                    return;
-                }
-
+            //If the killed mob isn't a mob being used for a shield already & its a mob we are allowed to use
+            if (!RushiaShieldAbility.getShieldMobs().contains(entity) && !RushiaShield.EXCEPTIONS.contains(entity.getType())) {
+                killMob((Mob) entity, entity.getKiller(), context.getStack()); //Run the killMob method
+                return;
             }
-
+        }
     }
 }
