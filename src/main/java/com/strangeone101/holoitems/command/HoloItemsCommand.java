@@ -86,6 +86,8 @@ public class HoloItemsCommand implements CommandExecutor {
                             item.getProperties().stream().map(property -> property.getPropertyName() + "="
                                     + property.get(stack.getItemMeta().getPersistentDataContainer()))
                                     .collect(Collectors.joining()) + "]"));
+                    sender.sendMessage("Lore: " + item.getLore() + "");
+
                 } else if (args[1].equalsIgnoreCase("stresscache")) {
                     int amount = 100;
                     if (args.length > 2) {
