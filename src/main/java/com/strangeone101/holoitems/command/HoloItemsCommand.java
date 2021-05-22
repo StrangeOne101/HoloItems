@@ -2,8 +2,9 @@ package com.strangeone101.holoitems.command;
 
 import com.strangeone101.holoitemsapi.CustomItem;
 import com.strangeone101.holoitemsapi.CustomItemRegistry;
-import com.strangeone101.holoitemsapi.EventContext;
 import com.strangeone101.holoitemsapi.Properties;
+import com.strangeone101.holoitemsapi.itemevent.EventCache;
+import com.strangeone101.holoitemsapi.itemevent.Position;
 import org.apache.commons.lang3.tuple.MutableTriple;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -38,23 +39,31 @@ public class HoloItemsCommand implements CommandExecutor {
                     sender.sendMessage("/holoitems debug registry");
                     sender.sendMessage("/holoitems debug stresscache [amount]");
                 } else if (args[1].equalsIgnoreCase("cache")) {
-                    if (!EventContext.CACHED_POSITIONS_BY_SLOT.containsKey(sender)) {
+                    if (!(sender instanceof Player)) {
+                        sender.sendMessage("Must not be used from console");
+                        return true;
+                    }
+                    if (!EventCache.CACHED_POSITIONS_BY_SLOT.containsKey(sender)) {
                         sender.sendMessage("No cache found!");
                         return true;
                     }
                     sender.sendMessage("----- Cache -------");
-                    for (Integer slot : EventContext.CACHED_POSITIONS_BY_SLOT.get(sender).keySet()) {
-                        MutableTriple<CustomItem, ItemStack, EventContext.Position> triple =
-                                EventContext.CACHED_POSITIONS_BY_SLOT.get(sender).get(slot);
+                    for (Integer slot : EventCache.CACHED_POSITIONS_BY_SLOT.get(sender).keySet()) {
+                        MutableTriple<CustomItem, ItemStack, Position> triple =
+                                EventCache.CACHED_POSITIONS_BY_SLOT.get(sender).get(slot);
                         sender.sendMessage("[" + slot + "] " + triple.getLeft().getInternalName() + " = " + triple.getRight().toString());
 
                     }
                     sender.sendMessage("----- End cache -------");
                 } else if (args[1].equalsIgnoreCase("registry")) {
-                    for (String s : EventContext.getRegistryDebug()) {
+                    for (String s : EventCache.getRegistryDebug()) {
                         sender.sendMessage(s);
                     }
                 } else if (args[1].equalsIgnoreCase("item")) {
+                    if (!(sender instanceof Player)) {
+                        sender.sendMessage("Must not be used from console");
+                        return true;
+                    }
                     ItemStack stack = ((Player)sender).getInventory().getItemInMainHand();
                     if (!CustomItemRegistry.isCustomItem(stack)) {
                         sender.sendMessage("Not a custom item!");
@@ -94,7 +103,7 @@ public class HoloItemsCommand implements CommandExecutor {
                     for (int i = 0; i < amount; i++) {
                         Player player = (Player) Bukkit.getOnlinePlayers().toArray()[rand.nextInt(Bukkit.getOnlinePlayers().size())];
                         long currentTime = System.currentTimeMillis();
-                        EventContext.fullCache(player);
+                        EventCache.fullCache(player);
                         totalTime += (System.currentTimeMillis() - currentTime);
                     }
 

@@ -1,6 +1,7 @@
 package com.strangeone101.holoitems;
 
 import com.strangeone101.holoitems.command.HoloItemsCommand;
+import com.strangeone101.holoitems.items.DeathCrystal;
 import com.strangeone101.holoitems.tables.Cat;
 import com.strangeone101.holoitemsapi.loot.CustomLootRegistry;
 import com.strangeone101.holoitems.tables.Endermite;
@@ -35,6 +36,8 @@ public final class HoloItemsPlugin extends JavaPlugin {
 
         HoloItemsAPI.setup(this);
         new Keys();
+
+        getServer().getPluginManager().registerEvents(new DeathCrystal("",0), this);
 
         Items.registerHoloItems();
         registerRecipes();
@@ -97,8 +100,5 @@ public final class HoloItemsPlugin extends JavaPlugin {
         enchantedSandRecipe.setIngredient('X', new CIRecipeChoice(nether_diamond));
 
         RecipeManager.registerRecipe(enchantedSandRecipe, new NamespacedKey(this, "enchanted_sand"));
-
-
-
     }
 }

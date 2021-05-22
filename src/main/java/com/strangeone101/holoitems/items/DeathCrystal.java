@@ -2,54 +2,141 @@ package com.strangeone101.holoitems.items;
 
 import com.strangeone101.holoitems.Keys;
 import com.strangeone101.holoitemsapi.CustomItem;
-import com.strangeone101.holoitemsapi.EventContext;
 import com.strangeone101.holoitemsapi.interfaces.Interactable;
-import com.strangeone101.holoitemsapi.interfaces.ItemEvent;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import com.strangeone101.holoitemsapi.itemevent.ActiveConditions;
+import com.strangeone101.holoitemsapi.itemevent.EventContext;
+import com.strangeone101.holoitemsapi.itemevent.ItemEvent;
+import com.strangeone101.holoitemsapi.itemevent.Target;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+
+import java.util.Arrays;
+import java.util.Random;
 
 public class DeathCrystal extends CustomItem implements Interactable, Listener {
 
-    public ItemStack itemStack;
+    int tier;
+    static Material[] passable_block = new Material[] {Material.AIR, Material.WATER};
 
-    public DeathCrystal() {
-        super("death_crystal", Material.NETHER_STAR);
+    public DeathCrystal(String name, int tier) {
+        super(name, Material.NETHER_STAR);
         this.setDisplayName("Death Crystal")
                 .addLore("Teleport you to last death location")
                 .addLore("Can only be used once per death")
-                .addLore("Right click to use");
-        //Probably can add Lore to say if point has been set or not
-    }
-
-    @Override
-    public ItemStack buildStack(Player player) {
-        ItemStack stack = super.buildStack(player);
-        ItemMeta meta = stack.getItemMeta();
-
-        meta.getPersistentDataContainer().set(Keys.getKeys().DEATH_LOC, PersistentDataType.INTEGER_ARRAY, new int[] {0,0,0});
-        meta.getPersistentDataContainer().set(Keys.getKeys().DEATH_LOC_SET, PersistentDataType.INTEGER, 0);
-        meta.getPersistentDataContainer().set(Keys.getKeys().DEATH_WORLD, PersistentDataType.STRING, "placeholder");
-
-        stack.setItemMeta(meta);
-        itemStack = stack;
-        return stack;
+                .addLore("Right click to use")
+                .addLore("")
+                .addLore(ChatColor.YELLOW + "Tier: " + tier);
+        this.tier = tier;
     }
 
     @Override
     public boolean onInteract(Player player, CustomItem item, ItemStack stack) {
-        ItemMeta meta = stack.getItemMeta();
-        if (meta.getPersistentDataContainer().get(Keys.getKeys().DEATH_LOC_SET, PersistentDataType.INTEGER) == 1) {
-            int[] loc_array_int = meta.getPersistentDataContainer().get(Keys.getKeys().DEATH_LOC, PersistentDataType.INTEGER_ARRAY);
-            Location tp_loc = new Location(Bukkit.getWorld(meta.getPersistentDataContainer().get(Keys.getKeys().DEATH_WORLD, PersistentDataType.STRING)), loc_array_int[0], loc_array_int[1], loc_array_int[2]);
-            player.teleport(tp_loc);
+        if (player.getPersistentDataContainer().get(Keys.getKeys().DEATH_LOC_SET, PersistentDataType.INTEGER) == 1) {
+            Random rand = new Random();
+            int[] loc_array = player.getPersistentDataContainer().get(Keys.getKeys().DEATH_LOC, PersistentDataType.INTEGER_ARRAY);
+            World world = Bukkit.getWorld(player.getPersistentDataContainer().get(Keys.getKeys().DEATH_WORLD, PersistentDataType.STRING));
+
+            if (this.tier > 2) {
+                Location tp_loc = new Location(world, loc_array[0], loc_array[1], loc_array[2]);
+                player.teleport(tp_loc);
+
+                player.getPersistentDataContainer().set(Keys.getKeys().DEATH_LOC_SET, PersistentDataType.INTEGER, 0);
+                stack.setAmount(stack.getAmount() - 1);
+                return true;
+            }
+
+            for (int i = 0;i < 50; i++) {
+                int x_addition;
+                int z_addition;
+
+                x_addition = rand.nextInt((((2 - this.tier) * 50) + 30) * 2) - (((2 - this.tier) * 50) + 30);
+                if (x_addition < 0) {
+                    x_addition -= 20;
+                } else {
+                    x_addition += 20;
+                }
+                z_addition = rand.nextInt((((2 - this.tier) * 50) + 30) * 2) - (((2 - this.tier) * 50) + 30);
+                if (z_addition < 0) {
+                    z_addition -= 20;
+                } else {
+                    z_addition += 20;
+                }
+
+                Location tp_loc = new Location(world, loc_array[0] + x_addition, loc_array[1], loc_array[2] + z_addition);
+                Location head_loc = new Location(world, loc_array[0] + x_addition, loc_array[1] + 1, loc_array[2] + z_addition);
+
+                if ((Arrays.asList(passable_block).contains(tp_loc.getBlock().getType())) && ((Arrays.asList(passable_block).contains(head_loc.getBlock().getType())))) {
+                    player.teleport(tp_loc);
+
+                    player.getPersistentDataContainer().set(Keys.getKeys().DEATH_LOC_SET, PersistentDataType.INTEGER, 0);
+                    stack.setAmount(stack.getAmount() - 1);
+                    return true;
+                }
+            }
+
+            for (int i = 0;i < 40; i++) {
+                int x_addition;
+                int y_addition;
+                int z_addition;
+
+                x_addition = rand.nextInt((((2 - this.tier) * 50) + 30) * 2) - (((2 - this.tier) * 50) + 30);
+                if (x_addition < 0) {
+                    x_addition -= 20;
+                } else {
+                    x_addition += 20;
+                }
+                y_addition = rand.nextInt(7) - 4;
+                if (y_addition >= 0){
+                    y_addition += 1;
+                }
+                if ((loc_array[1] + y_addition) < 2) {
+                    continue;
+                }
+                z_addition = rand.nextInt((((2 - this.tier) * 50) + 30) * 2) - (((2 - this.tier) * 50) + 30);
+                if (z_addition < 0) {
+                    z_addition -= 20;
+                } else {
+                    z_addition += 20;
+                }
+
+                Location tp_loc = new Location(world, loc_array[0] + x_addition, loc_array[1] + y_addition, loc_array[2] + z_addition);
+                Location head_loc = new Location(world, loc_array[0] + x_addition, loc_array[1] + y_addition + 1, loc_array[2] + z_addition);
+
+                if ((Arrays.asList(passable_block).contains(tp_loc.getBlock().getType())) && ((Arrays.asList(passable_block).contains(head_loc.getBlock().getType())))) {
+                    player.teleport(tp_loc);
+
+                    player.getPersistentDataContainer().set(Keys.getKeys().DEATH_LOC_SET, PersistentDataType.INTEGER, 0);
+                    stack.setAmount(stack.getAmount() - 1);
+                    return true;
+                }
+            }
+
+            int y_pos = world.getHighestBlockAt(loc_array[0], loc_array[2]).getY();
+            int x_addition;
+            int z_addition;
+
+            x_addition = rand.nextInt((((2 - this.tier) * 50) + 30) * 2) - (((2 - this.tier) * 50) + 30);
+            if (x_addition < 0) {
+                x_addition -= 20;
+            } else {
+                x_addition += 20;
+            }
+            z_addition = rand.nextInt((((2 - this.tier) * 50) + 30) * 2) - (((2 - this.tier) * 50) + 30);
+            if (z_addition < 0) {
+                z_addition -= 20;
+            } else {
+                z_addition += 20;
+            }
+
+            player.teleport(new Location(world, loc_array[0] + x_addition, y_pos, loc_array[2] + z_addition));
+            player.getPersistentDataContainer().set(Keys.getKeys().DEATH_LOC_SET, PersistentDataType.INTEGER, 0);
+            stack.setAmount(stack.getAmount() - 1);
         } else {
             player.sendMessage("You haven't died once!");
         }
@@ -58,15 +145,20 @@ public class DeathCrystal extends CustomItem implements Interactable, Listener {
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
-        System.out.println("Test1");
-        if (event.getEntity().getInventory().contains(itemStack)) {
-            System.out.println("Test2");
-            Location loc = event.getEntity().getLocation();
-            ItemStack stack = itemStack;
-            ItemMeta meta = stack.getItemMeta();
-            meta.getPersistentDataContainer().set(Keys.getKeys().DEATH_LOC, PersistentDataType.INTEGER_ARRAY, new int[] {loc.getBlockX(), loc.getBlockY(), loc.getBlockZ()});
-            meta.getPersistentDataContainer().set(Keys.getKeys().DEATH_LOC_SET, PersistentDataType.INTEGER, 1);
-            meta.getPersistentDataContainer().set(Keys.getKeys().DEATH_WORLD, PersistentDataType.STRING, loc.getWorld().getName());
+        Location loc = event.getEntity().getLocation();
+        Player player = event.getEntity();
+        player.getPersistentDataContainer().set(Keys.getKeys().DEATH_LOC, PersistentDataType.INTEGER_ARRAY, new int[]{loc.getBlockX(), loc.getBlockY(), loc.getBlockZ()});
+        player.getPersistentDataContainer().set(Keys.getKeys().DEATH_LOC_SET, PersistentDataType.INTEGER, 1);
+        player.getPersistentDataContainer().set(Keys.getKeys().DEATH_WORLD, PersistentDataType.STRING, loc.getWorld().getName());
+    }
+
+    @ItemEvent(target = Target.ALL,active = ActiveConditions.NONE)
+    public void onPlayerJoin(EventContext context, PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        if(!player.hasPlayedBefore()) {
+            player.getPersistentDataContainer().set(Keys.getKeys().DEATH_LOC, PersistentDataType.INTEGER_ARRAY, new int[] {0,0,0});
+            player.getPersistentDataContainer().set(Keys.getKeys().DEATH_LOC_SET, PersistentDataType.INTEGER, 0);
+            player.getPersistentDataContainer().set(Keys.getKeys().DEATH_WORLD, PersistentDataType.STRING, "");
         }
     }
 }

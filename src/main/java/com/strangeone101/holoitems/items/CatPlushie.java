@@ -1,9 +1,11 @@
 package com.strangeone101.holoitems.items;
 
 import com.strangeone101.holoitemsapi.CustomItem;
-import com.strangeone101.holoitemsapi.EventContext;
+import com.strangeone101.holoitemsapi.itemevent.ActiveConditions;
+import com.strangeone101.holoitemsapi.itemevent.EventContext;
 import com.strangeone101.holoitemsapi.interfaces.Interactable;
-import com.strangeone101.holoitemsapi.interfaces.ItemEvent;
+import com.strangeone101.holoitemsapi.itemevent.ItemEvent;
+import com.strangeone101.holoitemsapi.itemevent.Position;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -28,11 +30,8 @@ public class CatPlushie extends CustomItem implements Interactable {
         return false;
     }
 
-    @ItemEvent
+    @ItemEvent(active = ActiveConditions.HELD)
     public void onChat(EventContext context, AsyncPlayerChatEvent event){
-        System.out.println("true");
-        if(context.getPosition() == EventContext.Position.HELD || context.getPosition() == EventContext.Position.OFFHAND) {
-            event.setMessage(event.getMessage() + " nya");
-        }
+        event.setMessage(event.getMessage() + " nya");
     }
 }

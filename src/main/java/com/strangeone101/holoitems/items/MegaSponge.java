@@ -1,4 +1,4 @@
-package com.strangeone101.holoitems.items.implementations;
+package com.strangeone101.holoitems.items;
 
 import com.strangeone101.holoitemsapi.CustomItem;
 import com.strangeone101.holoitems.HoloItemsPlugin;

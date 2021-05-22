@@ -4,6 +4,8 @@ import com.strangeone101.holoitems.items.*;
 import com.strangeone101.holoitemsapi.CustomItem;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class Items {
 
@@ -29,8 +31,23 @@ public class Items {
 
     public static CustomItem SCRAMBLED_EGG;
     public static CustomItem BUTTER_CLOCK;
+    public static CustomItem SPICY_CHICKEN;
+    public static CustomItem SANDWICH_HONEY;
+    public static CustomItem SANDWICH_BEEF;
+    public static CustomItem SANDWICH_PORK;
+    public static CustomItem SANDWICH_CHICKEN;
+    public static CustomItem SANDWICH_CHICKEN_SPICY;
+
     public static CustomItem CAT_PLUSHIE;
-    public static CustomItem DEATH_CRYSTAL;
+
+    public static CustomItem DEATH_CRYSTAL_1;
+    public static CustomItem DEATH_CRYSTAL_2;
+    public static CustomItem DEATH_CRYSTAL_3;
+
+    public static CustomItem ENDER_CHEST_UPGRADER_3;
+    public static CustomItem ENDER_CHEST_UPGRADER_4;
+    public static CustomItem ENDER_CHEST_UPGRADER_5;
+    public static CustomItem ENDER_CHEST_UPGRADER_6;
 
     public static void registerHoloItems() {
 
@@ -92,10 +109,24 @@ public class Items {
                 .setDisplayName(ChatColor.RED + "Lava Sponge").addLore(ChatColor.DARK_GRAY + "Placeable Block").addLore("")
                 .addLore(ChatColor.GRAY + "Soaks up a large amount of lava").setInternalID(2123).register();
 
-        SCRAMBLED_EGG = new ScrambledEgg("scrambled_egg", Material.BAKED_POTATO).setDisplayName(ChatColor.YELLOW + "Scrambled Egg").setInternalID(501).register();
-        BUTTER_CLOCK = new ScrambledEgg("butter_clock", Material.CLOCK).setDisplayName(ChatColor.YELLOW + "Butter Clock").setInternalID(502).register();
+        SCRAMBLED_EGG = new BasicFood("scrambled_egg", Material.BAKED_POTATO, 3, 2).setDisplayName(ChatColor.YELLOW + "Scrambled Egg").setInternalID(7000).register();
+        BUTTER_CLOCK = new BasicFood("butter_clock", Material.CLOCK, 4, 3).setDisplayName(ChatColor.YELLOW + "Butter Clock").setInternalID(7001).register();
+        SPICY_CHICKEN = new PotionFood("spicy_chicken", Material.COOKED_CHICKEN, 6, 6, new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20 * 12, 0), 20 * 60 * 4)
+                .setDisplayName(ChatColor.RED + "Spicy Chicken").setInternalID(7002).register();
+        SANDWICH_BEEF = new BasicFood("sandwich_beef", Material.BREAD, 12, 10).setDisplayName(ChatColor.YELLOW + "Beef Sandwich").setInternalID(7003).register();
+        SANDWICH_PORK = new BasicFood("sandwich_pork", Material.BREAD, 12, 10).setDisplayName(ChatColor.YELLOW + "Pork Sandwich").setInternalID(7004).register();
+        SANDWICH_HONEY = new BasicFood("sandwich_honey", Material.BREAD, 12, 10).setDisplayName(ChatColor.GOLD + "Honey Sandwich").setInternalID(7005).register();
+        SANDWICH_CHICKEN = new BasicFood("sandwich_chicken", Material.BREAD, 10, 10).setDisplayName(ChatColor.YELLOW + "Chicken Sandwich").setInternalID(7006).register();
+        SANDWICH_CHICKEN_SPICY = new PotionFood("sandwich_chicken_spicy", Material.BREAD, 12, 10, new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20 * 18, 0), 20 * 60 * 8).setDisplayName(ChatColor.RED + "Spicy Chicken Sandwich").setInternalID(7007).register();
         CAT_PLUSHIE = new CatPlushie().setInternalID(2124).register();
-        DEATH_CRYSTAL = new DeathCrystal().setInternalID(4100).register();
 
+        DEATH_CRYSTAL_1 = new DeathCrystal("death_crystal_1",1).setInternalID(2125).register();
+        DEATH_CRYSTAL_2 = new DeathCrystal("death_crystal_2",2).setInternalID(2126).register();
+        DEATH_CRYSTAL_3 = new DeathCrystal("death_crystal_3",3).setInternalID(2127).register();
+
+        ENDER_CHEST_UPGRADER_3 = new EnderChestUpgrader("ender_chest_upgrade_3",3,"three").setInternalID(2128).register();
+        ENDER_CHEST_UPGRADER_4 = new EnderChestUpgrader("ender_chest_upgrade_4",4,"four").setInternalID(2129).register();
+        ENDER_CHEST_UPGRADER_5 = new EnderChestUpgrader("ender_chest_upgrade_5",5,"five").setInternalID(2130).register();
+        ENDER_CHEST_UPGRADER_6 = new EnderChestUpgrader("ender_chest_upgrade_6",6,"six").setInternalID(2131).register();
     }
 }
