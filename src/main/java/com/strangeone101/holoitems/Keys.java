@@ -22,7 +22,6 @@ public class Keys {
     public final NamespacedKey RUSSIAN_ROULETTE = new NamespacedKey(HoloItemsPlugin.INSTANCE, "russian_roulette");
 
     public final NamespacedKey DEATH_LOC = new NamespacedKey(HoloItemsPlugin.INSTANCE, "death_loc");
-    public final NamespacedKey DEATH_LOC_SET = new NamespacedKey(HoloItemsPlugin.INSTANCE, "death_loc_set");
     public final NamespacedKey DEATH_WORLD = new NamespacedKey(HoloItemsPlugin.INSTANCE, "death_world");
 
     private static Keys keys;

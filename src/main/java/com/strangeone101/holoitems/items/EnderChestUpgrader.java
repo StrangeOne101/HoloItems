@@ -30,21 +30,9 @@ public class EnderChestUpgrader extends CustomItem implements Interactable {
 
     @Override
     public boolean onInteract(Player player, CustomItem item, ItemStack stack) {
-        int highest_tier;
-
-        if (player.hasPermission("purpur.enderchest.rows.six")) {
-            highest_tier = 6;
-        } else if (player.hasPermission("purpur.enderchest.rows.five")) {
-            highest_tier = 5;
-        } else if (player.hasPermission("purpur.enderchest.rows.four")) {
-            highest_tier = 4;
-        } else {
-            highest_tier = 3;
-        }
-
         LuckPerms lp = LuckPermsProvider.get();
 
-        if (highest_tier < tier) {
+        if (!player.hasPermission("purpur.enderchest.rows." + this.tier_name)) {
             User user = lp.getPlayerAdapter(Player.class).getUser(player);
             user.data().add(Node.builder("purpur.enderchest.rows." + this.tier_name).build());
             lp.getUserManager().saveUser(user);
@@ -52,7 +40,9 @@ public class EnderChestUpgrader extends CustomItem implements Interactable {
             player.sendMessage("Ender chest upgraded!");
         } else if (tier == 3) {
             User user = lp.getPlayerAdapter(Player.class).getUser(player);
-            user.data().add(Node.builder("purpur.enderchest.rows.three").build());
+            user.data().remove(Node.builder("purpur.enderchest.rows.six").build());
+            user.data().remove(Node.builder("purpur.enderchest.rows.five").build());
+            user.data().remove(Node.builder("purpur.enderchest.rows.four").build());
             lp.getUserManager().saveUser(user);
         } else {
             player.sendMessage("You already have this tier/higher tier ender chest!");
