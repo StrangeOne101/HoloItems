@@ -110,7 +110,7 @@ public class RushiaShield extends CustomItem implements Interactable {
         return false;
     }
 
-    @ItemEvent(active = ActiveConditions.HELD, target = Target.WORLD)
+    @ItemEvent(active = ActiveConditions.HELD, target = Target.SELF)
     public void onTrigger(EventContext context, EntityDeathEvent event) {
         //If they are holding the item in the offhand or main hand
         LivingEntity entity = event.getEntity();

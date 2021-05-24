@@ -1,6 +1,8 @@
 package com.strangeone101.holoitems;
 
 import com.strangeone101.holoitems.command.HoloItemsCommand;
+import com.strangeone101.holoitems.items.DeathCrystal;
+import com.strangeone101.holoitems.tables.Cat;
 import com.strangeone101.holoitemsapi.loot.CustomLootRegistry;
 import com.strangeone101.holoitems.tables.Endermite;
 import com.strangeone101.holoitems.tables.GemOre;
@@ -35,14 +37,16 @@ public final class HoloItemsPlugin extends JavaPlugin {
         HoloItemsAPI.setup(this);
         new Keys();
 
+        getServer().getPluginManager().registerEvents(new DeathCrystal("",0), this);
+
         Items.registerHoloItems();
         registerRecipes();
 
         CustomLootRegistry.registerDeathTable(EntityType.ENDERMITE, new Endermite());
+        CustomLootRegistry.registerDeathTable(EntityType.CAT, new Cat());
+        CustomLootRegistry.registerDeathTable(EntityType.OCELOT, new Cat());
         CustomLootRegistry.registerBlockBreakTable(Material.SPAWNER, new Spawner());
         CustomLootRegistry.registerBlockBreakTable(Material.EMERALD_ORE, new GemOre());
-
-
 
         getLogger().info("Registered " + CustomItemRegistry.getCustomItems().size()
                 + " custom items and " + RecipeManager.getRegisteredAmount() + " custom recipes!");
@@ -96,8 +100,5 @@ public final class HoloItemsPlugin extends JavaPlugin {
         enchantedSandRecipe.setIngredient('X', new CIRecipeChoice(nether_diamond));
 
         RecipeManager.registerRecipe(enchantedSandRecipe, new NamespacedKey(this, "enchanted_sand"));
-
-
-
     }
 }

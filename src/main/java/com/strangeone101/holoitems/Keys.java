@@ -1,7 +1,6 @@
 package com.strangeone101.holoitems;
 
 import org.bukkit.NamespacedKey;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class Keys {
 
@@ -21,6 +20,9 @@ public class Keys {
 
     /** How many clicks until death. Should be <strong>INT</strong> */
     public final NamespacedKey RUSSIAN_ROULETTE = new NamespacedKey(HoloItemsPlugin.INSTANCE, "russian_roulette");
+
+    public final NamespacedKey DEATH_LOC = new NamespacedKey(HoloItemsPlugin.INSTANCE, "death_loc");
+    public final NamespacedKey DEATH_WORLD = new NamespacedKey(HoloItemsPlugin.INSTANCE, "death_world");
 
     private static Keys keys;
 

@@ -1,14 +1,7 @@
 package com.strangeone101.holoitems;
 
-import com.strangeone101.holoitems.items.PotionFood;
+import com.strangeone101.holoitems.items.*;
 import com.strangeone101.holoitemsapi.CustomItem;
-import com.strangeone101.holoitems.items.BerryTrident;
-import com.strangeone101.holoitems.items.EnchantedBlock;
-import com.strangeone101.holoitems.items.MegaSponge;
-import com.strangeone101.holoitems.items.MoguBoots;
-import com.strangeone101.holoitems.items.RushiaShield;
-import com.strangeone101.holoitems.items.RussianRevolver;
-import com.strangeone101.holoitems.items.BasicFood;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.potion.PotionEffect;
@@ -44,6 +37,17 @@ public class Items {
     public static CustomItem SANDWICH_PORK;
     public static CustomItem SANDWICH_CHICKEN;
     public static CustomItem SANDWICH_CHICKEN_SPICY;
+
+    public static CustomItem CAT_PLUSHIE;
+
+    public static CustomItem DEATH_CRYSTAL_1;
+    public static CustomItem DEATH_CRYSTAL_2;
+    public static CustomItem DEATH_CRYSTAL_3;
+
+    public static CustomItem ENDER_CHEST_UPGRADER_3;
+    public static CustomItem ENDER_CHEST_UPGRADER_4;
+    public static CustomItem ENDER_CHEST_UPGRADER_5;
+    public static CustomItem ENDER_CHEST_UPGRADER_6;
 
     public static void registerHoloItems() {
 
@@ -113,9 +117,16 @@ public class Items {
         SANDWICH_PORK = new BasicFood("sandwich_pork", Material.BREAD, 12, 10).setDisplayName(ChatColor.YELLOW + "Pork Sandwich").setInternalID(7004).register();
         SANDWICH_HONEY = new BasicFood("sandwich_honey", Material.BREAD, 12, 10).setDisplayName(ChatColor.GOLD + "Honey Sandwich").setInternalID(7005).register();
         SANDWICH_CHICKEN = new BasicFood("sandwich_chicken", Material.BREAD, 10, 10).setDisplayName(ChatColor.YELLOW + "Chicken Sandwich").setInternalID(7006).register();
-        SANDWICH_CHICKEN_SPICY = new PotionFood("sandwich_chicken_spicy", Material.BREAD, 12, 10,
-                new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20 * 18, 0), 20 * 60 * 8).setDisplayName(ChatColor.RED + "Spicy Chicken Sandwich").setInternalID(7007).register();
+        SANDWICH_CHICKEN_SPICY = new PotionFood("sandwich_chicken_spicy", Material.BREAD, 12, 10, new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20 * 18, 0), 20 * 60 * 8).setDisplayName(ChatColor.RED + "Spicy Chicken Sandwich").setInternalID(7007).register();
+        CAT_PLUSHIE = new CatPlushie().setInternalID(2124).register();
 
+        DEATH_CRYSTAL_1 = new DeathCrystal("death_crystal_1",1).setInternalID(2125).register();
+        DEATH_CRYSTAL_2 = new DeathCrystal("death_crystal_2",2).setInternalID(2126).register();
+        DEATH_CRYSTAL_3 = new DeathCrystal("death_crystal_3",3).setInternalID(2127).register();
 
+        ENDER_CHEST_UPGRADER_3 = new EnderChestUpgrader("ender_chest_upgrade_3",3,"three").setInternalID(2128).register();
+        ENDER_CHEST_UPGRADER_4 = new EnderChestUpgrader("ender_chest_upgrade_4",4,"four").setInternalID(2129).register();
+        ENDER_CHEST_UPGRADER_5 = new EnderChestUpgrader("ender_chest_upgrade_5",5,"five").setInternalID(2130).register();
+        ENDER_CHEST_UPGRADER_6 = new EnderChestUpgrader("ender_chest_upgrade_6",6,"six").setInternalID(2131).register();
     }
 }
