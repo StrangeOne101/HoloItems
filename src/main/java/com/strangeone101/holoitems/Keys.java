@@ -24,6 +24,8 @@ public class Keys {
     public final NamespacedKey DEATH_LOC = new NamespacedKey(HoloItemsPlugin.INSTANCE, "death_loc");
     public final NamespacedKey DEATH_WORLD = new NamespacedKey(HoloItemsPlugin.INSTANCE, "death_world");
 
+    public final NamespacedKey CUSTOM_SPAWN_EGG = new NamespacedKey(HoloItemsPlugin.INSTANCE, "custom_spawn_egg");
+
     private static Keys keys;
 
     public static Keys getKeys() {

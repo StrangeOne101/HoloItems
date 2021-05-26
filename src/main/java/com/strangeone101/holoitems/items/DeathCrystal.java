@@ -102,8 +102,8 @@ public class DeathCrystal extends CustomItem implements Interactable, Listener {
             int x_addition;
             int z_addition;
 
-            x_addition = this.calc_random(this.tier * 50, true, 20);
-            z_addition = this.calc_random(this.tier * 50, true, 20);
+            x_addition = calc_random(this.tier * 50, true, 20);
+            z_addition = calc_random(this.tier * 50, true, 20);
             int y_pos = world.getHighestBlockAt(loc_array[0] + x_addition, loc_array[2] + z_addition).getY();
 
             player.teleport(new Location(world, loc_array[0] + x_addition, y_pos + 1, loc_array[2] + z_addition));
@@ -123,15 +123,15 @@ public class DeathCrystal extends CustomItem implements Interactable, Listener {
         player.getPersistentDataContainer().set(Keys.getKeys().DEATH_WORLD, PersistentDataType.STRING, loc.getWorld().getName());
     }
 
-    int calc_random(int max) {
-        return this.calc_random(max, false);
+    static int calc_random(int max) {
+        return calc_random(max, false);
     }
 
-    int calc_random(int max, boolean negative) {
-        return this.calc_random(max, negative, 0);
+    static int calc_random(int max, boolean negative) {
+        return calc_random(max, negative, 0);
     }
 
-    int calc_random(int max, boolean negative, int min) {
+    static int calc_random(int max, boolean negative, int min) {
         Random rand = new Random();
         int original_max = max;
 

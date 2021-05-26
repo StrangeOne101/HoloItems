@@ -36,6 +36,7 @@ public class EnderChestUpgrader extends CustomItem implements Interactable {
             User user = lp.getPlayerAdapter(Player.class).getUser(player);
             user.data().add(Node.builder("purpur.enderchest.rows." + this.tier_name).build());
             lp.getUserManager().saveUser(user);
+            stack.setAmount(stack.getAmount() - 1);
             
             player.sendMessage("Ender chest upgraded!");
         } else if (tier == 3) {

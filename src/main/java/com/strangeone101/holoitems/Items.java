@@ -49,6 +49,20 @@ public class Items {
     public static CustomItem ENDER_CHEST_UPGRADER_5;
     public static CustomItem ENDER_CHEST_UPGRADER_6;
 
+    public static CustomItem PAPER_EGG;
+    public static CustomItem CAPTURE_SWORD;
+    public static CustomItem CORRUPT_PAPER_EGG;
+
+    public static CustomItem GROUNDPOUND_BOOTS;
+    public static CustomItem PHANTOM_TALISMAN;
+
+    public static CustomItem HOLY_HELMET;
+    public static CustomItem HOLY_CHESTPLATE;
+    public static CustomItem HOLY_LEGGINGS;
+    public static CustomItem HOLY_BOOTS;
+
+    public static CustomItem DEMON_SWORD;
+
     public static void registerHoloItems() {
 
         RUSHIA_SHIELD = (RushiaShield) new RushiaShield().setInternalID(1700).register();
@@ -128,5 +142,25 @@ public class Items {
         ENDER_CHEST_UPGRADER_4 = new EnderChestUpgrader("ender_chest_upgrade_4",4,"four").setInternalID(2129).register();
         ENDER_CHEST_UPGRADER_5 = new EnderChestUpgrader("ender_chest_upgrade_5",5,"five").setInternalID(2130).register();
         ENDER_CHEST_UPGRADER_6 = new EnderChestUpgrader("ender_chest_upgrade_6",6,"six").setInternalID(2131).register();
+
+        PAPER_EGG = new CustomItem("paper_egg", Material.PAPER, "Paper Egg")
+                .addLore("")
+                .addLore("Useful for capturing mobs")
+                .setInternalID(1013).register();
+        CAPTURE_SWORD = new CaptureSword().setInternalID(3000).register();
+        CORRUPT_PAPER_EGG = new CustomItem("corrupt_paper_egg", Material.EGG, "Corrupt Paper Egg")
+                .addLore("Corrupted paper eggs!")
+                .addLore("You shouldn't take them away from their home!")
+                .setInternalID(2128).register();
+
+        GROUNDPOUND_BOOTS = new GroundpoundBoots().setInternalID(5000).register();
+        PHANTOM_TALISMAN = new PhantomTalisman().setInternalID(2129).register();
+
+        HOLY_HELMET = new HolyArmor("holy_helmet", Material.IRON_HELMET, "Holy Helmet").setInternalID(5001).register();
+        HOLY_CHESTPLATE = new HolyArmor("holy_chestplate", Material.IRON_CHESTPLATE, "Holy Chestplate").setInternalID(5002).register();
+        HOLY_LEGGINGS = new HolyArmor("holy_leggings", Material.IRON_LEGGINGS, "Holy Leggings").setInternalID(5003).register();
+        HOLY_BOOTS = new HolyArmor("holy_boots", Material.IRON_BOOTS, "Holy Boots").setInternalID(5004).register();
+
+        DEMON_SWORD = new DemonSword().setInternalID(3001).register();
     }
 }
