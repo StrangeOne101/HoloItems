@@ -27,7 +27,6 @@ public class DemonSwordAbility extends ItemAbility {
     public void tick() {
         ticks_left -= 1;
         if (ticks_left == 0) {
-            System.out.println("Removed");
             remove();
         }
     }

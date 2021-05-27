@@ -24,7 +24,6 @@ public class HolyArmor extends CustomItem {
 
     @ItemEvent(target = Target.WORLD, active = ActiveConditions.EQUIPED)
     public void onPlayerDamage(EventContext context, EntityDamageByEntityEvent event) {
-        System.out.println("HolyArmor: onPlayerDamage");
         if (context.getPlayer() == event.getEntity()) {
             if (Arrays.asList(UNDEAD).contains(event.getDamager().getType())) {
                 event.setDamage(event.getDamage() * 3 / 4);
@@ -35,8 +34,8 @@ public class HolyArmor extends CustomItem {
     @ItemEvent(target = Target.WORLD, active = ActiveConditions.EQUIPED)
     public void onPotionEffect(EventContext context, EntityPotionEffectEvent event) {
         if (context.getPlayer() == event.getEntity()) {
-            if (event.getModifiedType() == PotionEffectType.WITHER) {
-                if ((event.getAction() == EntityPotionEffectEvent.Action.ADDED) || (event.getAction() == EntityPotionEffectEvent.Action.CHANGED)) {
+            if (event.getNewEffect() != null) {
+                if (event.getNewEffect().getType().equals(PotionEffectType.WITHER)) {
                     event.setCancelled(true);
                 }
             }

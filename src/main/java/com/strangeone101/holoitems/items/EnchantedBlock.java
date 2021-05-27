@@ -1,8 +1,10 @@
 package com.strangeone101.holoitems.items;
 
+import com.strangeone101.holoitems.HoloItemsPlugin;
 import com.strangeone101.holoitemsapi.CustomItem;
 import com.strangeone101.holoitemsapi.Properties;
 import com.strangeone101.holoitemsapi.interfaces.Placeable;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -37,7 +39,10 @@ public class EnchantedBlock extends CustomItem implements Placeable {
     @Override
     public boolean place(Block block, Player player, CustomItem item, ItemStack stack) {
         if (player.getGameMode() != GameMode.CREATIVE) {
-            stack.setAmount(stack.getAmount() + 1);
+            Bukkit.getScheduler().runTaskLater(HoloItemsPlugin.INSTANCE, () -> {
+                stack.setAmount(stack.getAmount() + 1);
+                player.updateInventory();
+            }, 1L);
         }
 
         return false;
