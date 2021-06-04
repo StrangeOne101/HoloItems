@@ -47,7 +47,8 @@ public class Items {
     public static CustomItem ENDER_CHEST_UPGRADER_3;
     public static CustomItem ENDER_CHEST_UPGRADER_4;
     public static CustomItem ENDER_CHEST_UPGRADER_5;
-    public static CustomItem ENDER_CHEST_UPGRADER_6;
+
+    public static CustomItem PEKO_SWORD;
 
     public static void registerHoloItems() {
 
@@ -127,6 +128,7 @@ public class Items {
         ENDER_CHEST_UPGRADER_3 = new EnderChestUpgrader("ender_chest_upgrade_3",3,"three").setInternalID(2128).register();
         ENDER_CHEST_UPGRADER_4 = new EnderChestUpgrader("ender_chest_upgrade_4",4,"four").setInternalID(2129).register();
         ENDER_CHEST_UPGRADER_5 = new EnderChestUpgrader("ender_chest_upgrade_5",5,"five").setInternalID(2130).register();
-        ENDER_CHEST_UPGRADER_6 = new EnderChestUpgrader("ender_chest_upgrade_6",6,"six").setInternalID(2131).register();
+
+        PEKO_SWORD = new WarcriminalSword().register();
     }
 }
