@@ -87,7 +87,7 @@ public final class HoloItemsPlugin extends JavaPlugin {
         adhesiveRecipe.addIngredient(Material.SAND);
         adhesiveRecipe.addIngredient(new CIRecipeChoice(etherreal_essense));
 
-        RecipeManager.registerRecipe(adhesiveRecipe, new NamespacedKey(this, "adhesiveRecipe"));
+        RecipeManager.registerRecipe(adhesiveRecipe);
 
         ShapelessRecipe netherDiamondRecipe = new ShapelessRecipe(new NamespacedKey(this, "nether_diamond"), nether_diamond);
         netherDiamondRecipe.addIngredient(Material.DIAMOND);
@@ -95,13 +95,20 @@ public final class HoloItemsPlugin extends JavaPlugin {
         netherDiamondRecipe.addIngredient(Material.NETHER_STAR);
         netherDiamondRecipe.addIngredient(new CIRecipeChoice(otherworldly_adhesive));
 
-        RecipeManager.registerRecipe(netherDiamondRecipe, new NamespacedKey(this, "nether_diamond"));
+        RecipeManager.registerRecipe(netherDiamondRecipe);
 
         ShapedRecipe enchantedSandRecipe = new ShapedRecipe(new NamespacedKey(this, "enchanted_sand"), enchanted_sand);
         enchantedSandRecipe.shape("SSS", "SXS", "SSS");
         enchantedSandRecipe.setIngredient('S', new RecipeChoice.ExactChoice(new ItemStack(Material.SAND, 64)));
         enchantedSandRecipe.setIngredient('X', new CIRecipeChoice(nether_diamond));
 
-        RecipeManager.registerRecipe(enchantedSandRecipe, new NamespacedKey(this, "enchanted_sand"));
+        RecipeManager.registerRecipe(enchantedSandRecipe);
+
+        ShapedRecipe testRecipe = new ShapedRecipe(new NamespacedKey(this, "test"), Items.DEATH_CRYSTAL_2.buildStack(null));
+        testRecipe.shape("SSS", "SXS", "SSS");
+        testRecipe.setIngredient('S', Material.OBSIDIAN);
+        testRecipe.setIngredient('X', new CIRecipeChoice(Items.DEATH_CRYSTAL_1.buildStack(null)));
+
+        RecipeManager.registerRecipe(testRecipe);
     }
 }
