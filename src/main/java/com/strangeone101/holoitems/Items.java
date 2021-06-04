@@ -4,6 +4,7 @@ import com.strangeone101.holoitems.items.*;
 import com.strangeone101.holoitemsapi.CustomItem;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -48,6 +49,9 @@ public class Items {
     public static CustomItem ENDER_CHEST_UPGRADER_4;
     public static CustomItem ENDER_CHEST_UPGRADER_5;
     public static CustomItem ENDER_CHEST_UPGRADER_6;
+
+    public static CustomItem MELON_CANNON;
+    public static CustomItem ADMIN_CANNON;
 
     public static void registerHoloItems() {
 
@@ -128,5 +132,11 @@ public class Items {
         ENDER_CHEST_UPGRADER_4 = new EnderChestUpgrader("ender_chest_upgrade_4",4,"four").setInternalID(2129).register();
         ENDER_CHEST_UPGRADER_5 = new EnderChestUpgrader("ender_chest_upgrade_5",5,"five").setInternalID(2130).register();
         ENDER_CHEST_UPGRADER_6 = new EnderChestUpgrader("ender_chest_upgrade_6",6,"six").setInternalID(2131).register();
+        MELON_CANNON = new BlockCannon("melon_cannon", Material.GOLDEN_HORSE_ARMOR, new ItemStack(Material.MELON), new ItemStack(Material.MELON), BlockCannon.MELON_HIT)
+
+                .addLore(ChatColor.YELLOW + "Right click to fire. " + ChatColor.RED + "Requires melons" + ChatColor.YELLOW + " to fire.").register();
+                .addLore("")
+                .addLore(ChatColor.DARK_GRAY + "Party Weapon")
+                .setDisplayName(ChatColor.RED + "Melon Cannon")
     }
 }

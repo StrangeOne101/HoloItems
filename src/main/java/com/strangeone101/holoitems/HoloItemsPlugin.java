@@ -38,9 +38,12 @@ public final class HoloItemsPlugin extends JavaPlugin {
         new Keys();
 
         getServer().getPluginManager().registerEvents(new DeathCrystal("",0), this);
+        getServer().getPluginManager().registerEvents(new HoloPatchListener(), this);
 
         Items.registerHoloItems();
         registerRecipes();
+
+
 
         CustomLootRegistry.registerDeathTable(EntityType.ENDERMITE, new Endermite());
         CustomLootRegistry.registerDeathTable(EntityType.CAT, new Cat());
