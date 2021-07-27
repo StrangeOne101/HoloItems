@@ -45,14 +45,17 @@ public class Items {
     public static CustomItem DEATH_CRYSTAL_2;
     public static CustomItem DEATH_CRYSTAL_3;
 
-    public static CustomItem ENDER_CHEST_UPGRADER_3;
     public static CustomItem ENDER_CHEST_UPGRADER_4;
     public static CustomItem ENDER_CHEST_UPGRADER_5;
+    public static CustomItem ENDER_CHEST_UPGRADER_6;
 
     public static CustomItem PEKO_SWORD;
 
     public static CustomItem MELON_CANNON;
+    public static CustomItem GOLD_CANNON;
     public static CustomItem ADMIN_CANNON;
+
+    public static AnimalSoul ANIMAL_SOUL;
 
     public static void registerHoloItems() {
 
@@ -129,17 +132,25 @@ public class Items {
         DEATH_CRYSTAL_2 = new DeathCrystal("death_crystal_2",2).setInternalID(2126).register();
         DEATH_CRYSTAL_3 = new DeathCrystal("death_crystal_3",3).setInternalID(2127).register();
 
-        ENDER_CHEST_UPGRADER_3 = new EnderChestUpgrader("ender_chest_upgrade_3",3,"three").setInternalID(2128).register();
         ENDER_CHEST_UPGRADER_4 = new EnderChestUpgrader("ender_chest_upgrade_4",4,"four").setInternalID(2129).register();
         ENDER_CHEST_UPGRADER_5 = new EnderChestUpgrader("ender_chest_upgrade_5",5,"five").setInternalID(2130).register();
+        ENDER_CHEST_UPGRADER_6 = new EnderChestUpgrader("ender_chest_upgrade_6",6,"six").setInternalID(2131).register();
 
         PEKO_SWORD = new WarcriminalSword().register();
-        ENDER_CHEST_UPGRADER_6 = new EnderChestUpgrader("ender_chest_upgrade_6",6,"six").setInternalID(2131).register();
-        MELON_CANNON = new BlockCannon("melon_cannon", Material.GOLDEN_HORSE_ARMOR, new ItemStack(Material.MELON), new ItemStack(Material.MELON), BlockCannon.MELON_HIT)
 
-                .addLore(ChatColor.YELLOW + "Right click to fire. " + ChatColor.RED + "Requires melons" + ChatColor.YELLOW + " to fire.").register();
-                .addLore("")
-                .addLore(ChatColor.DARK_GRAY + "Party Weapon")
+        MELON_CANNON = new BlockCannon("melon_cannon", Material.GOLDEN_HORSE_ARMOR, new ItemStack(Material.MELON), new ItemStack(Material.MELON), BlockCannon.MELON_HIT)
                 .setDisplayName(ChatColor.RED + "Melon Cannon")
+                .addLore(ChatColor.DARK_GRAY + "Party Weapon")
+                .addLore("")
+                .addLore(ChatColor.YELLOW + "Right click to fire. " + ChatColor.RED + "Requires melons" + ChatColor.YELLOW + " to fire.").register();
+
+        GOLD_CANNON = new BlockCannon("gold_cannon", Material.GOLDEN_HORSE_ARMOR, new ItemStack(Material.GOLD_BLOCK), new ItemStack(Material.GOLD_BLOCK), BlockCannon.GOLD_HIT)
+                .setDisplayName(ChatColor.YELLOW + "Gold Cannon")
+                .addLore(ChatColor.DARK_GRAY + "Party Weapon")
+                .addLore("")
+                .addLore(ChatColor.YELLOW + "Right click to fire. " + ChatColor.RED + "Requires gold blocks" + ChatColor.YELLOW + " to fire.").register();
+
+
+        ANIMAL_SOUL = (AnimalSoul) new AnimalSoul().setDisplayName(ChatColor.LIGHT_PURPLE + "{name}'s Soul").register();
     }
 }

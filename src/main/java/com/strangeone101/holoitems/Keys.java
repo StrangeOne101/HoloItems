@@ -25,6 +25,9 @@ public class Keys {
     public final NamespacedKey DEATH_WORLD = new NamespacedKey(HoloItemsPlugin.INSTANCE, "death_world");
 
     public final NamespacedKey TEMP_ENTITY = new NamespacedKey(HoloItemsPlugin.INSTANCE, "temp");
+
+    public final NamespacedKey ENTITY_SOUL = new NamespacedKey(HoloItemsPlugin.INSTANCE, "entity");
+
     private static Keys keys;
 
     public static Keys getKeys() {

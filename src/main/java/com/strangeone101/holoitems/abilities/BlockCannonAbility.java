@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.util.Vector;
 
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class BlockCannonAbility extends ItemAbility {
@@ -23,12 +24,12 @@ public class BlockCannonAbility extends ItemAbility {
     private Location origin;
     private Vector lastVec;
 
-    private Consumer<Location> onHit;
+    private BiConsumer<Player, Location> onHit;
 
     private long length = 2_000;
     private long distance = 25;
 
-    public BlockCannonAbility(Player player, ItemStack stack, Inventory inventory, int slot, Material block, ItemStack ammo, Consumer<Location> onHit) {
+    public BlockCannonAbility(Player player, ItemStack stack, Inventory inventory, int slot, Material block, ItemStack ammo, BiConsumer<Player, Location> onHit) {
         super(player, stack, inventory, slot);
 
         this.onHit = onHit;
@@ -100,7 +101,7 @@ public class BlockCannonAbility extends ItemAbility {
             fallingBlock.remove();
         }
 
-        onHit.accept(lastLoc);
+        onHit.accept(getPlayer(), lastLoc);
         remove();
     }
 
