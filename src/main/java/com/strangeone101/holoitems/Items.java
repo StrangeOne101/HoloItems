@@ -1,7 +1,9 @@
 package com.strangeone101.holoitems;
 
+import com.iridium.iridiumcolorapi.IridiumColorAPI;
 import com.strangeone101.holoitems.items.*;
 import com.strangeone101.holoitemsapi.CustomItem;
+import com.strangeone101.holoitemsapi.HoloItemsAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -56,6 +58,19 @@ public class Items {
     public static CustomItem ADMIN_CANNON;
 
     public static AnimalSoul ANIMAL_SOUL;
+    public static AnimalSoul CURSED_ANIMAL_SOUL;
+    public static CustomItem REVIVE_ANIMAL_KIT;
+
+    public static CustomItem SOUL_GLASS;
+    public static CustomItem SOUL_STEEL;
+    public static CustomItem SOUL_GOLD;
+    public static CustomItem SOUL_GOLD_ENHANCED;
+
+    public static CustomItem RAINBOW_HELMET;
+    public static CustomItem RAINBOW_CHESTPLATE;
+    public static CustomItem RAINBOW_LEGGINGS;
+    public static CustomItem RAINBOW_BOOTS;
+
 
     public static void registerHoloItems() {
 
@@ -132,9 +147,9 @@ public class Items {
         DEATH_CRYSTAL_2 = new DeathCrystal("death_crystal_2",2).setInternalID(2126).register();
         DEATH_CRYSTAL_3 = new DeathCrystal("death_crystal_3",3).setInternalID(2127).register();
 
-        ENDER_CHEST_UPGRADER_4 = new EnderChestUpgrader("ender_chest_upgrade_4",4,"four").setInternalID(2129).register();
-        ENDER_CHEST_UPGRADER_5 = new EnderChestUpgrader("ender_chest_upgrade_5",5,"five").setInternalID(2130).register();
-        ENDER_CHEST_UPGRADER_6 = new EnderChestUpgrader("ender_chest_upgrade_6",6,"six").setInternalID(2131).register();
+        ENDER_CHEST_UPGRADER_4 = new EnderChestUpgrader("ender_chest_upgrade_1",1,"four").setInternalID(2129).register();
+        ENDER_CHEST_UPGRADER_5 = new EnderChestUpgrader("ender_chest_upgrade_2",2,"five").setInternalID(2130).register();
+        ENDER_CHEST_UPGRADER_6 = new EnderChestUpgrader("ender_chest_upgrade_3",3,"six").setInternalID(2131).register();
 
         PEKO_SWORD = new WarcriminalSword().register();
 
@@ -152,5 +167,20 @@ public class Items {
 
 
         ANIMAL_SOUL = (AnimalSoul) new AnimalSoul().setDisplayName(ChatColor.LIGHT_PURPLE + "{name}'s Soul").register();
+
+        SOUL_GLASS = new CustomItem("soul_glass", Material.BROWN_STAINED_GLASS).setDisplayName(ChatColor.RED + "Soul Glass").addLore(ChatColor.DARK_GRAY + "Crafting Ingredient").register();
+        SOUL_STEEL = new CustomItem("soul_steel", Material.IRON_INGOT).setDisplayName(ChatColor.RED + "Soul Silver").addLore(ChatColor.DARK_GRAY + "Crafting Ingredient").register();
+        SOUL_GOLD = new CustomItem("soul_gold", Material.GOLD_INGOT).setDisplayName(ChatColor.YELLOW + "Soulaurium").addLore(ChatColor.DARK_GRAY + "Crafting Ingredient").register();
+        SOUL_GOLD_ENHANCED = new CustomItem("soul_gold_enhanced", Material.GOLD_INGOT).setDisplayName(ChatColor.YELLOW + "Enhanced Soulaurum").addLore(ChatColor.DARK_GRAY + "Crafting Ingredient").register();
+
+        RAINBOW_HELMET = new CustomItem("rainbow_helmet", Material.LEATHER_HELMET).setDisplayName(IridiumColorAPI.rainbow(ChatColor.BOLD + "RAINBOW HELMET", 1)).addLore(ChatColor.GRAY + "It does what you expect!")
+                .onUpdate((item, meta) -> HoloItemsAPI.getNMS().writeNBT(int.class, 1, "CMIRainbowArmor", item)).register();
+        RAINBOW_CHESTPLATE = new CustomItem("rainbow_chestplate", Material.LEATHER_CHESTPLATE).setDisplayName(IridiumColorAPI.rainbow(ChatColor.BOLD + "RAINBOW CHESTPLATE", 1)).addLore(ChatColor.GRAY + "It does what you expect!")
+                .onUpdate((item, meta) -> HoloItemsAPI.getNMS().writeNBT(int.class, 1, "CMIRainbowArmor", item)).register();
+        RAINBOW_LEGGINGS = new CustomItem("rainbow_leggings", Material.LEATHER_LEGGINGS).setDisplayName(IridiumColorAPI.rainbow(ChatColor.BOLD + "RAINBOW LEGGINGS", 1)).addLore(ChatColor.GRAY + "It does what you expect!")
+                .onUpdate((item, meta) -> HoloItemsAPI.getNMS().writeNBT(int.class, 1, "CMIRainbowArmor", item)).register();
+        RAINBOW_BOOTS = new CustomItem("rainbow_boots", Material.LEATHER_BOOTS).setDisplayName(IridiumColorAPI.rainbow(ChatColor.BOLD + "RAINBOW BOOTS", 1)).addLore(ChatColor.GRAY + "It does what you expect!")
+                .onUpdate((item, meta) -> HoloItemsAPI.getNMS().writeNBT(int.class, 1, "CMIRainbowArmor", item)).register();
+
     }
 }

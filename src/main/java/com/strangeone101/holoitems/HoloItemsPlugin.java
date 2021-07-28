@@ -1,5 +1,6 @@
 package com.strangeone101.holoitems;
 
+import com.iridium.iridiumcolorapi.IridiumColorAPI;
 import com.strangeone101.holoitems.command.HoloItemsCommand;
 import com.strangeone101.holoitems.items.DeathCrystal;
 import com.strangeone101.holoitems.tables.Cat;
@@ -21,16 +22,18 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.awt.*;
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
+
 public final class HoloItemsPlugin extends JavaPlugin {
 
     public static HoloItemsPlugin INSTANCE;
 
     @Override
     public void onEnable() {
-
-
         INSTANCE = this;
-
 
         getCommand("holoitem").setExecutor(new HoloItemsCommand());
 
@@ -42,8 +45,6 @@ public final class HoloItemsPlugin extends JavaPlugin {
 
         Items.registerHoloItems();
         registerRecipes();
-
-
 
         CustomLootRegistry.registerDeathTable(EntityType.ENDERMITE, new Endermite());
         CustomLootRegistry.registerDeathTable(EntityType.CAT, new Cat());

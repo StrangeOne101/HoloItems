@@ -19,9 +19,10 @@ public class EnderChestUpgrader extends CustomItem implements Interactable {
 
     public EnderChestUpgrader(String name, int tier, String tier_name) {
         super(name, Material.ENDER_EYE);
-        this.setDisplayName(ChatColor.LIGHT_PURPLE + "Ender Chest Upgrader" + ChatColor.YELLOW + "(Tier " + (tier - 3) + ")")
-                .addLore(ChatColor.GRAY + "Upgrades the amount of rows you have in your")
-                .addLore(ChatColor.GRAY + "ender chest. This tier raises it to " + tier + " rows")
+        this.setDisplayName(ChatColor.LIGHT_PURPLE + "Ender Chest Upgrader" + ChatColor.YELLOW + "(Tier " + (tier) + ")")
+                .addLore(ChatColor.GRAY + "Upgrades the amount of rows you")
+                .addLore(ChatColor.GRAY + "have in your ender chest. This")
+                .addLore(ChatColor.GRAY + "tier raises it to " + ChatColor.YELLOW + (tier + 3) + ChatColor.GRAY + " rows")
                 .addLore("")
                 .addLore(ChatColor.YELLOW + "Right click to use!");
 
