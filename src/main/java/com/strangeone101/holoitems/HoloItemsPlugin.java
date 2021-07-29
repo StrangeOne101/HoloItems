@@ -111,5 +111,39 @@ public final class HoloItemsPlugin extends JavaPlugin {
         testRecipe.setIngredient('X', new CIRecipeChoice(Items.DEATH_CRYSTAL_1.buildStack(null)));
 
         RecipeManager.registerRecipe(testRecipe);
+
+        ItemStack rainbowDyeStack = Items.RAINBOW_DYE.buildStack(null);
+        ShapelessRecipe rainbowDye = new ShapelessRecipe(new NamespacedKey(this, "rainbow_dye"), rainbowDyeStack);
+        rainbowDye.addIngredient(Material.RED_DYE);
+        rainbowDye.addIngredient(Material.ORANGE_DYE);
+        rainbowDye.addIngredient(Material.YELLOW_DYE);
+        rainbowDye.addIngredient(Material.LIME_DYE);
+        rainbowDye.addIngredient(Material.LIGHT_BLUE_DYE);
+        rainbowDye.addIngredient(Material.BLUE_DYE);
+        rainbowDye.addIngredient(Material.PURPLE_DYE);
+        rainbowDye.addIngredient(Material.MAGENTA_DYE);
+        rainbowDye.addIngredient(Material.PINK_DYE);
+        RecipeManager.registerRecipe(rainbowDye);
+
+        ShapelessRecipe rainbowHelmet = new ShapelessRecipe(new NamespacedKey(this, "rainbow_helmet"), Items.RAINBOW_HELMET.buildStack(null));
+        for (int i = 0; i < 8; i++) rainbowHelmet.addIngredient(new CIRecipeChoice(rainbowDyeStack));
+        rainbowHelmet.addIngredient(Material.LEATHER_HELMET);
+
+        ShapelessRecipe rainbowChest = new ShapelessRecipe(new NamespacedKey(this, "rainbow_chest"), Items.RAINBOW_CHESTPLATE.buildStack(null));
+        for (int i = 0; i < 8; i++) rainbowChest.addIngredient(new CIRecipeChoice(rainbowDyeStack));
+        rainbowChest.addIngredient(Material.LEATHER_CHESTPLATE);
+
+        ShapelessRecipe rainbowLegs = new ShapelessRecipe(new NamespacedKey(this, "rainbow_legs"), Items.RAINBOW_LEGGINGS.buildStack(null));
+        for (int i = 0; i < 8; i++) rainbowLegs.addIngredient(new CIRecipeChoice(rainbowDyeStack));
+        rainbowLegs.addIngredient(Material.LEATHER_LEGGINGS);
+
+        ShapelessRecipe rainbowBoots = new ShapelessRecipe(new NamespacedKey(this, "rainbow_boots"), Items.RAINBOW_BOOTS.buildStack(null));
+        for (int i = 0; i < 8; i++) rainbowBoots.addIngredient(new CIRecipeChoice(rainbowDyeStack));
+        rainbowBoots.addIngredient(Material.LEATHER_BOOTS);
+
+        RecipeManager.registerRecipe(rainbowHelmet);
+        RecipeManager.registerRecipe(rainbowChest);
+        RecipeManager.registerRecipe(rainbowLegs);
+        RecipeManager.registerRecipe(rainbowBoots);
     }
 }

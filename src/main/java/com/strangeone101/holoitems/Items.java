@@ -6,6 +6,7 @@ import com.strangeone101.holoitemsapi.CustomItem;
 import com.strangeone101.holoitemsapi.HoloItemsAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -70,6 +71,7 @@ public class Items {
     public static CustomItem RAINBOW_CHESTPLATE;
     public static CustomItem RAINBOW_LEGGINGS;
     public static CustomItem RAINBOW_BOOTS;
+    public static CustomItem RAINBOW_DYE;
 
 
     public static void registerHoloItems() {
@@ -174,13 +176,15 @@ public class Items {
         SOUL_GOLD_ENHANCED = new CustomItem("soul_gold_enhanced", Material.GOLD_INGOT).setDisplayName(ChatColor.YELLOW + "Enhanced Soulaurum").addLore(ChatColor.DARK_GRAY + "Crafting Ingredient").register();
 
         RAINBOW_HELMET = new CustomItem("rainbow_helmet", Material.LEATHER_HELMET).setDisplayName(IridiumColorAPI.rainbow(ChatColor.BOLD + "RAINBOW HELMET", 1)).addLore(ChatColor.GRAY + "It does what you expect!")
-                .onUpdate((item, meta) -> HoloItemsAPI.getNMS().writeNBT(int.class, 1, "CMIRainbowArmor", item)).register();
+                .addNBT("CMIRainbowArmor", 1).setFlags(ItemFlag.HIDE_DYE).setLeatherColor(0xFF2222).register();
         RAINBOW_CHESTPLATE = new CustomItem("rainbow_chestplate", Material.LEATHER_CHESTPLATE).setDisplayName(IridiumColorAPI.rainbow(ChatColor.BOLD + "RAINBOW CHESTPLATE", 1)).addLore(ChatColor.GRAY + "It does what you expect!")
-                .onUpdate((item, meta) -> HoloItemsAPI.getNMS().writeNBT(int.class, 1, "CMIRainbowArmor", item)).register();
+                .addNBT("CMIRainbowArmor", 1).setFlags(ItemFlag.HIDE_DYE).setLeatherColor(0xFFFF22).register();
         RAINBOW_LEGGINGS = new CustomItem("rainbow_leggings", Material.LEATHER_LEGGINGS).setDisplayName(IridiumColorAPI.rainbow(ChatColor.BOLD + "RAINBOW LEGGINGS", 1)).addLore(ChatColor.GRAY + "It does what you expect!")
-                .onUpdate((item, meta) -> HoloItemsAPI.getNMS().writeNBT(int.class, 1, "CMIRainbowArmor", item)).register();
+                .addNBT("CMIRainbowArmor", 1).setFlags(ItemFlag.HIDE_DYE).setLeatherColor(0x22FF22).register();
         RAINBOW_BOOTS = new CustomItem("rainbow_boots", Material.LEATHER_BOOTS).setDisplayName(IridiumColorAPI.rainbow(ChatColor.BOLD + "RAINBOW BOOTS", 1)).addLore(ChatColor.GRAY + "It does what you expect!")
-                .onUpdate((item, meta) -> HoloItemsAPI.getNMS().writeNBT(int.class, 1, "CMIRainbowArmor", item)).register();
+                .addNBT("CMIRainbowArmor", 1).setFlags(ItemFlag.HIDE_DYE).setLeatherColor(0x2222FF).register();
+
+        RAINBOW_DYE = new RainbowDye().register();
 
     }
 }
