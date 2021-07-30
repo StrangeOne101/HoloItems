@@ -72,6 +72,7 @@ public class Items {
     public static CustomItem RAINBOW_LEGGINGS;
     public static CustomItem RAINBOW_BOOTS;
     public static CustomItem RAINBOW_DYE;
+    public static CustomItem GRADIENT_DYE;
 
 
     public static void registerHoloItems() {
@@ -185,6 +186,6 @@ public class Items {
                 .addNBT("CMIRainbowArmor", 1).setFlags(ItemFlag.HIDE_DYE).setLeatherColor(0x2222FF).register();
 
         RAINBOW_DYE = new RainbowDye().register();
-
+        GRADIENT_DYE = new GradientDye().register();
     }
 }

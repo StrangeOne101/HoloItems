@@ -3,12 +3,16 @@ package com.strangeone101.holoitems;
 import com.iridium.iridiumcolorapi.IridiumColorAPI;
 import com.strangeone101.holoitems.command.HoloItemsCommand;
 import com.strangeone101.holoitems.items.DeathCrystal;
+import com.strangeone101.holoitems.items.GradientDye;
 import com.strangeone101.holoitems.tables.Cat;
 import com.strangeone101.holoitemsapi.loot.CustomLootRegistry;
 import com.strangeone101.holoitems.tables.Endermite;
 import com.strangeone101.holoitems.tables.GemOre;
 import com.strangeone101.holoitems.tables.Spawner;
 import com.strangeone101.holoitemsapi.recipe.CIRecipeChoice;
+import com.strangeone101.holoitemsapi.recipe.ItemGroups;
+import com.strangeone101.holoitemsapi.recipe.RecipeBuilder;
+import com.strangeone101.holoitemsapi.recipe.RecipeGroup;
 import com.strangeone101.holoitemsapi.recipe.RecipeManager;
 import com.strangeone101.holoitemsapi.CustomItemRegistry;
 import com.strangeone101.holoitemsapi.HoloItemsAPI;
@@ -26,6 +30,9 @@ import java.awt.*;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.strangeone101.holoitemsapi.recipe.RecipeGroup.GROUP_1;
+import static com.strangeone101.holoitemsapi.recipe.RecipeGroup.GROUP_2;
 
 public final class HoloItemsPlugin extends JavaPlugin {
 
@@ -145,5 +152,28 @@ public final class HoloItemsPlugin extends JavaPlugin {
         RecipeManager.registerRecipe(rainbowChest);
         RecipeManager.registerRecipe(rainbowLegs);
         RecipeManager.registerRecipe(rainbowBoots);
+
+        //Define new advanced recipe with the key `gradient_dye` and set the output to a basic gradient dye
+        new RecipeBuilder.AdvancedShape("gradient_dye", Items.GRADIENT_DYE.buildStack(null))
+                .setShape("1X2").setIngredient('X', rainbowDyeStack) //Set the shape
+                .setIngredientGroup('1', RecipeGroup.GROUP_1) //Make the left group 1
+                .setIngredientGroup('2', RecipeGroup.GROUP_2) //Make the right side group 2
+                .setGroupItems(RecipeGroup.GROUP_1, ItemGroups.DYES) //Set group 1 to accept all dyes
+                .setGroupItems(RecipeGroup.GROUP_2, ItemGroups.DYES) //Same again
+
+                //The code to run when the item is avaliable to preview in the crafting table
+                .previewModifier(((itemStack, map, recipeContext) -> { //The map contains the itemstacks for each group we made
+                    if (map.get(GROUP_1).getType() == map.get(GROUP_2).getType()) return null;   //No gradients for the same color
+                    GradientDye.setColor(itemStack, map.get(RecipeGroup.GROUP_1).getType(), true); //Set the gradient parameters
+                    GradientDye.setColor(itemStack, map.get(RecipeGroup.GROUP_2).getType(), false);//to the colors in the crafting
+                    return Items.GRADIENT_DYE.updateStack(itemStack, recipeContext.getPlayer());       //table
+                    
+                //The code to run when we actually craft it. Same thing again
+                })).craftModifier(((itemStack, map, recipeContext) -> {
+                    if (map.get(GROUP_1).getType() == map.get(GROUP_2).getType()) return null;
+                    GradientDye.setColor(itemStack, map.get(RecipeGroup.GROUP_1).getType(), true);
+                    GradientDye.setColor(itemStack, map.get(RecipeGroup.GROUP_2).getType(), false);
+                    return Items.GRADIENT_DYE.updateStack(itemStack, recipeContext.getPlayer());
+                })).buildRegister(); //Build and register the recipe
     }
 }
