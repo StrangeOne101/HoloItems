@@ -60,7 +60,7 @@ public class Items {
 
     public static AnimalSoul ANIMAL_SOUL;
     public static AnimalSoul CURSED_ANIMAL_SOUL;
-    public static CustomItem REVIVE_ANIMAL_KIT;
+    public static ReviveKit REVIVE_ANIMAL_KIT;
 
     public static CustomItem SOUL_GLASS;
     public static CustomItem SOUL_STEEL;
@@ -187,5 +187,7 @@ public class Items {
 
         RAINBOW_DYE = new RainbowDye().register();
         GRADIENT_DYE = new GradientDye().register();
+
+        REVIVE_ANIMAL_KIT = (ReviveKit) new ReviveKit().register();
     }
 }

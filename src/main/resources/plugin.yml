@@ -1,7 +1,7 @@
 name: HoloItems
 version: ${project.version}
 main: com.strangeone101.holoitems.HoloItemsPlugin
-api-version: 1.16
+api-version: 1.17
 authors: [StrangeOne101]
 softdepend: [LuckPerms]
 description: Adds custom items

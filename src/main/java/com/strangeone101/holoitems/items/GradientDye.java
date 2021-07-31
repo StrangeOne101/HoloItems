@@ -1,6 +1,7 @@
 package com.strangeone101.holoitems.items;
 
 import com.google.common.collect.HashBiMap;
+import com.iridium.iridiumcolorapi.CustomColors;
 import com.iridium.iridiumcolorapi.IridiumColorAPI;
 import com.strangeone101.holoitems.HoloItemsPlugin;
 import com.strangeone101.holoitemsapi.CustomItem;
@@ -128,18 +129,24 @@ public class GradientDye extends CustomItem implements BlockInteractable {
             DyeColor dcl = colors.get(lcolor);
             DyeColor dcr = colors.get(rcolor);
 
-            Color cl = new Color(dcl.getColor().asRGB());
-            Color cr = new Color(dcr.getColor().asRGB());
+            Color cl = CustomColors.valueOf(dcl.name()).getAsColor();
+            Color cr = CustomColors.valueOf(dcr.name()).getAsColor();
 
 
+            boolean work = false;
             for (int line = 0; line < 4; line++) {
                 String s = sign.getLine(line);
+                if (s.equals("")) continue;
 
-                s = IridiumColorAPI.color(s, cl, cr);
+                s = IridiumColorAPI.color(ChatColor.stripColor(s), cl, cr);
                 sign.setLine(line, s);
+                work = true;
             }
-            itemStack.setAmount(itemStack.getAmount() - 1);
-            sign.update();
+            if (work) {
+                itemStack.setAmount(itemStack.getAmount() - 1);
+                sign.update();
+            }
+
             return true;
         }
 

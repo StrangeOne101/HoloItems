@@ -4,6 +4,7 @@ import com.iridium.iridiumcolorapi.IridiumColorAPI;
 import com.strangeone101.holoitems.command.HoloItemsCommand;
 import com.strangeone101.holoitems.items.DeathCrystal;
 import com.strangeone101.holoitems.items.GradientDye;
+import com.strangeone101.holoitems.items.ReviveKit;
 import com.strangeone101.holoitems.tables.Cat;
 import com.strangeone101.holoitemsapi.loot.CustomLootRegistry;
 import com.strangeone101.holoitems.tables.Endermite;
@@ -167,7 +168,7 @@ public final class HoloItemsPlugin extends JavaPlugin {
                     GradientDye.setColor(itemStack, map.get(RecipeGroup.GROUP_1).getType(), true); //Set the gradient parameters
                     GradientDye.setColor(itemStack, map.get(RecipeGroup.GROUP_2).getType(), false);//to the colors in the crafting
                     return Items.GRADIENT_DYE.updateStack(itemStack, recipeContext.getPlayer());       //table
-                    
+
                 //The code to run when we actually craft it. Same thing again
                 })).craftModifier(((itemStack, map, recipeContext) -> {
                     if (map.get(GROUP_1).getType() == map.get(GROUP_2).getType()) return null;
@@ -175,5 +176,13 @@ public final class HoloItemsPlugin extends JavaPlugin {
                     GradientDye.setColor(itemStack, map.get(RecipeGroup.GROUP_2).getType(), false);
                     return Items.GRADIENT_DYE.updateStack(itemStack, recipeContext.getPlayer());
                 })).buildRegister(); //Build and register the recipe
+
+        new RecipeBuilder.AdvancedShape("revive_kit", Items.REVIVE_ANIMAL_KIT.buildStack(null))
+                .setShape("OXO", "X@X", "OXO").setIngredientGroup('@', GROUP_1)
+                .setIngredient('O', Material.DARK_OAK_LOG)
+                .setIngredient('X', Items.SOUL_GOLD.buildStack(null))
+                .setGroupItems(GROUP_1, Items.ANIMAL_SOUL.buildStack(null))
+                .previewModifier((itemstack, map, context) -> Items.REVIVE_ANIMAL_KIT.fromSoul(map.get(GROUP_1)))
+                .craftModifier((itemstack, map, context) -> Items.REVIVE_ANIMAL_KIT.fromSoul(map.get(GROUP_1))).buildRegister();
     }
 }
