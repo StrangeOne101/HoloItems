@@ -28,6 +28,8 @@ public class Keys {
 
     public final NamespacedKey ENTITY_SOUL = new NamespacedKey(HoloItemsPlugin.INSTANCE, "entity");
 
+    public final NamespacedKey EGG_WORLD = new NamespacedKey(HoloItemsPlugin.INSTANCE, "egg_world");
+
     private static Keys keys;
 
     public static Keys getKeys() {
