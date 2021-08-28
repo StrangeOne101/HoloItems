@@ -87,13 +87,14 @@ public class CaptureSword extends CustomItem implements Swingable {
     public void onPortal(EventContext context, PlayerPortalEvent event) {
         int i = 0;
         for (ItemStack stack: event.getPlayer().getInventory().getContents()) {
+            i++;
             if (stack != null) {
                 if (stack.hasItemMeta()) {
                     if (stack.getItemMeta().getPersistentDataContainer().has(Keys.getKeys().EGG_WORLD, PersistentDataType.STRING)) {
                         if (!(stack.getItemMeta().getPersistentDataContainer().get(Keys.getKeys().EGG_WORLD, PersistentDataType.STRING).equals(event.getTo().getWorld().getName()))) {
                             int amount = stack.getAmount();
                             stack.setAmount(0);
-                            ItemStack corrupted_stack = Items.CORRUPTED_PAPER_EGG.buildStack(context.getPlayer());
+                            ItemStack corrupted_stack = Items.CORRUPTED_PAPER_EGG.buildStack(event.getPlayer());
                             corrupted_stack.setAmount(amount);
                             event.getPlayer().getInventory().setItem(i, corrupted_stack);
                         }
