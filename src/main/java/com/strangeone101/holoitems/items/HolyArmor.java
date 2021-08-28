@@ -52,6 +52,7 @@ public class HolyArmor extends CustomItem implements Interactable {
                 }
             }
         }
+        damageItem(context.getStack(), 1, context.getPlayer());
     }
 
     @ItemEvent(active = ActiveConditions.EQUIPED, target = Target.SELF)
