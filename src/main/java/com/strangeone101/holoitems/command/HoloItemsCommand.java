@@ -111,21 +111,43 @@ public class HoloItemsCommand implements CommandExecutor {
 
                     sender.sendMessage("Cached " + amount + " times in " + (totalTime) + "ms");
                 }
+            } else {
+                int maxPage = (int) Math.ceil(CustomItemRegistry.getCustomItems().size() / 54.0);
+
+                try {
+                    int pageNum = Integer.parseInt(args[0]);
+                    if (pageNum <= maxPage && pageNum > 0) {
+                        int skip = (pageNum - 1) * 54;
+
+                        int amount = CustomItemRegistry.getCustomItems().size() - skip;
+                        int rows = ((amount - 1) / 9) + 1;
+
+                        if (rows > 6) rows = 6;
+
+                        System.out.println(rows);
+
+                        Inventory inv = Bukkit.createInventory(null, rows * 9, "HoloItems List");
+
+                        for (CustomItem ci : CustomItemRegistry.getCustomItems().values()) {
+                            if (skip > 0) {
+                                skip--;
+                                continue;
+                            }
+                            inv.addItem(ci.buildStack((Player) sender));
+                        }
+
+                        ((Player)sender).openInventory(inv);
+                    } else {
+                        sender.sendMessage("Page doesn't exist");
+                    }
+                } catch (NumberFormatException e) {
+                    sender.sendMessage("/holoitems <page_num>\nMax page is: " + maxPage);
+                }
             }
             return true;
         }
 
-        int amount = CustomItemRegistry.getCustomItems().size();
-        int rows = ((amount - 1) / 9) + 1;
-
-        Inventory inv = Bukkit.createInventory(null, rows * 9, "HoloItems List");
-
-        for (CustomItem ci : CustomItemRegistry.getCustomItems().values()) {
-            inv.addItem(ci.buildStack((Player) sender));
-        }
-
-        ((Player)sender).openInventory(inv);
-
+        sender.sendMessage("/holoitems <page_num>");
         return true;
     }
 }
