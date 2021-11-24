@@ -59,7 +59,6 @@ public class HolyArmor extends CustomItem implements Interactable {
     public void onPlayerEffect(EventContext context, EntityPotionEffectEvent event) {
         if (event.isCancelled()) return;
         if ((event.getAction() == EntityPotionEffectEvent.Action.ADDED) || (event.getAction() == EntityPotionEffectEvent.Action.CHANGED)) {
-            System.out.println(event.getModifiedType());
             if (event.getModifiedType().equals(PotionEffectType.WITHER)) {
                 event.setCancelled(true);
             }

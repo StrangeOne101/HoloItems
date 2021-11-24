@@ -86,6 +86,9 @@ public class Items {
     public static CustomItem HOLY_LEGGINGS;
     public static CustomItem HOLY_BOOTS;
 
+    public static CustomItem EXP_POTION;
+    public static CustomItem EXP_SWORD;
+
     public static void registerHoloItems() {
 
         //1000-1999 Standard Items: Ingots, crafting ingredients, but not food
@@ -157,6 +160,7 @@ public class Items {
                 .setInternalID(3002).register();
         CAPTURE_SWORD = new CaptureSword().setInternalID(3003).register();
         //BERRY_TRIDENT = new BerryTrident();
+        EXP_SWORD = new ExpSword().setInternalID(3004).register();
 
         //4000-4999 Tools: Pickaxes, fishing rods, etc
 
@@ -203,6 +207,7 @@ public class Items {
                 .setInternalID(6006).register();
         SANDWICH_CHICKEN_SPICY = new PotionFood("sandwich_chicken_spicy", Material.BREAD, 12, 10, new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20 * 18, 0), 20 * 60 * 8).setDisplayName(ChatColor.RED + "Spicy Chicken Sandwich")
                 .setInternalID(6007).register();
+        EXP_POTION = new EXPPotion().setInternalID(6008).register();
 
         //7000-7999 Blocks: Alloy Furnace
         ENCHANTED_SAND = new EnchantedBlock("enchanted_sand", Material.SAND, "sand")
