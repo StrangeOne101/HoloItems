@@ -30,6 +30,8 @@ public class Keys {
 
     public final NamespacedKey EGG_WORLD = new NamespacedKey(HoloItemsPlugin.INSTANCE, "egg_world");
 
+    public final NamespacedKey EXP_AMOUNT = new NamespacedKey(HoloItemsPlugin.INSTANCE, "exp_amount");
+
     private static Keys keys;
 
     public static Keys getKeys() {

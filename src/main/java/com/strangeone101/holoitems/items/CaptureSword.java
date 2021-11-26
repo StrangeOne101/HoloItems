@@ -44,9 +44,9 @@ public class CaptureSword extends CustomItem implements Swingable {
     }
 
     @Override
-    public boolean hit(Entity entity, Player player, CustomItem customItem, ItemStack itemStack) {
+    public double hit(Entity entity, Player player, CustomItem customItem, ItemStack itemStack, double damage) {
         customItem.damageItem(itemStack, 1, player);
-        return false;
+        return damage;
     }
 
     @ItemEvent(active = ActiveConditions.MAINHAND, target = Target.WORLD)
