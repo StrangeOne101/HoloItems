@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class HoloItemsCommand implements CommandExecutor {
@@ -128,12 +128,22 @@ public class HoloItemsCommand implements CommandExecutor {
 
                         Inventory inv = Bukkit.createInventory(null, rows * 9, "HoloItems List");
 
-                        for (CustomItem ci : CustomItemRegistry.getCustomItems().values()) {
+                        HashMap<Integer, CustomItem> idMap = new HashMap<>();
+
+                        for (CustomItem ci: CustomItemRegistry.getCustomItems().values()) {
+                            idMap.put(ci.getInternalID(), ci);
+                        }
+
+                        ArrayList<Integer> idList = new ArrayList<>(idMap.keySet());
+
+                        Collections.sort(idList);
+
+                        for (int id: idList) {
                             if (skip > 0) {
                                 skip--;
                                 continue;
                             }
-                            inv.addItem(ci.buildStack((Player) sender));
+                            inv.addItem(idMap.get(id).buildStack((Player) sender));
                         }
 
                         ((Player)sender).openInventory(inv);
